@@ -1,14 +1,16 @@
 package com.picklerisk.grabber;
 
+import com.picklerisk.grabber.JsonSchema.AlphaVantage.TimeSeriesDailyAdjusted;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 
 public class AlphaVantageGrabber {
 	public AlphaVantageGrabber() {
 		
 	}
 }
-
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Quote {

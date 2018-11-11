@@ -29,7 +29,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GrabberMain {
 	
     private static final Logger log = LoggerFactory.getLogger(GrabberMain.class);
-
 	
 	public static void main(String[] args) {
 		System.out.println("Starting Endpoint Listener");
@@ -46,7 +45,6 @@ public class GrabberMain {
 	}
 	
 	// alpha vantage
-	
 	public void TestMongo() {
 		MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017");
 		MongoClient mongoClient = new MongoClient(connectionString);
