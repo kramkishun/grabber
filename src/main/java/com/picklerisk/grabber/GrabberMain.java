@@ -1,31 +1,11 @@
 package com.picklerisk.grabber;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.ServerAddress;
-
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoCollection;
-
-import org.bson.Document;
-import com.mongodb.Block;
-
-import com.mongodb.client.MongoCursor;
-import static com.mongodb.client.model.Filters.*;
-import com.mongodb.client.result.DeleteResult;
-import static com.mongodb.client.model.Updates.*;
-import com.mongodb.client.result.UpdateResult;
-import com.picklerisk.grabber.JsonSchema.AlphaVantage.TimeSeriesDailyAdjusted;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.web.client.RestTemplate;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
