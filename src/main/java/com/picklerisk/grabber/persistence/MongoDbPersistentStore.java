@@ -21,3 +21,4 @@ public class MongoDbPersistentStore<T extends MongoRepository<U, ?>, U> implemen
 		repository.save(data);
 	}	
 }
+

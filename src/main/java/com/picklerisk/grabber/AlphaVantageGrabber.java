@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
@@ -38,9 +39,14 @@ public class AlphaVantageGrabber {
 				+ sym 
 				+ "&outputsize=full&apikey=" 
 				+ API_KEY;
+		
+		log.info("Requesting: " + url);
         RestTemplate restTemplate = new RestTemplate();
-        
 		TimeSeriesDailyAdjusted tickData = restTemplate.getForObject(url, TimeSeriesDailyAdjusted.class);		
+		
+		// TODO: Proper API checks to ensure following the API Key rules
+		if (!Optional.ofNullable(tickData.getMetaData()).isPresent())
+			log.warn(sym + " not received. Alpha Vantage API returned malformed JSON");
 		
 		return tickData;
 	}
