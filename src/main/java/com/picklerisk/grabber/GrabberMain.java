@@ -13,6 +13,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.picklerisk.grabber.JsonSchema.AlphaVantage.TimeSeriesDailyAdjusted;
+import com.picklerisk.grabber.persistence.PersistentStore;
+import com.picklerisk.grabber.persistence.TimeSeriesDailyAdjustedMongoRepository;
 
 @SpringBootApplication
 public class GrabberMain implements CommandLineRunner {
@@ -20,7 +22,8 @@ public class GrabberMain implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(GrabberMain.class);
     
     @Autowired
-    private MongoDbAdapter mongoAdapter;
+    private PersistentStore<TimeSeriesDailyAdjustedMongoRepository,
+    	TimeSeriesDailyAdjusted> mongoAdapter;
     
     @Autowired
     private AlphaVantageGrabber grabber;
@@ -43,11 +46,11 @@ public class GrabberMain implements CommandLineRunner {
 	}
 	
 	public void refreshAllAdjustedDailies() throws FileNotFoundException {
-		mongoAdapter.clearTimeSeriesData();
+		mongoAdapter.clearData();
 		List<TimeSeriesDailyAdjusted> allSandP = grabber.grabSandPAdjustedDailyHistory();
 		for (TimeSeriesDailyAdjusted sym : allSandP) {
 			log.info("Adding " + sym.toString() + " to MongoDB");
-			mongoAdapter.addTimeSeriesData(sym);
+			mongoAdapter.addData(sym);
 		}
 	}
 }

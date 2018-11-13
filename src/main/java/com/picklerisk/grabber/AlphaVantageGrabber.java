@@ -52,7 +52,7 @@ public class AlphaVantageGrabber {
 		while (s.hasNextLine()) {
 			String sym = s.nextLine();
 			allTicks.add(grabAdjustedDailyHistory(sym));
-			log.info("Grabbing for " + sym);
+			log.info("Grabbing for '" + sym + "'");
 		}	
 		
 		s.close();
