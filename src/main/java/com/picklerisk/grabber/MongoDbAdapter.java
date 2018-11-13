@@ -11,8 +11,11 @@ public class MongoDbAdapter {
 	@Autowired
 	private TimeSeriesDailyAdjustedRepository repository;
 	
-	public void addTimeSeriesData(TimeSeriesDailyAdjusted data) {
+	public void clearTimeSeriesData() {
 		repository.deleteAll();
+	}
+	
+	public void addTimeSeriesData(TimeSeriesDailyAdjusted data) {
 		repository.save(data);
 	}	
 }

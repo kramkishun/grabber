@@ -1,6 +1,9 @@
 package com.picklerisk.grabber;
 
 
+import java.io.FileNotFoundException;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.picklerisk.grabber.JsonSchema.AlphaVantage.TimeSeriesDailyAdjusted;
 
 @SpringBootApplication
 public class GrabberMain implements CommandLineRunner {
@@ -21,9 +26,9 @@ public class GrabberMain implements CommandLineRunner {
     private AlphaVantageGrabber grabber;
     
 	public static void main(String[] args) {
-		System.out.println("Start Main");
+		log.info("Start Main");
 		SpringApplication.run(GrabberMain.class, args);
-		System.out.println("End Main");
+		log.info("End Main");
 	}
 
 	public GrabberMain( ) {
@@ -32,9 +37,18 @@ public class GrabberMain implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		System.out.println("Start Run");
-		mongoAdapter.addTimeSeriesData(grabber.grab());
-		System.out.println("End Run");
+		log.info("Start of 'run'");
+		refreshAllAdjustedDailies();
+		log.info("End of 'run'");
+	}
+	
+	public void refreshAllAdjustedDailies() throws FileNotFoundException {
+		mongoAdapter.clearTimeSeriesData();
+		List<TimeSeriesDailyAdjusted> allSandP = grabber.grabSandPAdjustedDailyHistory();
+		for (TimeSeriesDailyAdjusted sym : allSandP) {
+			log.info("Adding " + sym.toString() + " to MongoDB");
+			mongoAdapter.addTimeSeriesData(sym);
+		}
 	}
 }
+
