@@ -13,7 +13,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.picklerisk.grabber.JsonSchema.Iex.TimeSeriesDailyAdjusted;
-import com.picklerisk.grabber.persistence.AlphaVantageTimeSeriesMongoRepository;
 import com.picklerisk.grabber.persistence.IexTimeSeriesMongoRepository;
 
 @SpringBootApplication

@@ -1,6 +1,5 @@
 package com.picklerisk.grabber.persistence;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import com.picklerisk.grabber.JsonSchema.Iex.TimeSeriesDailyAdjusted;
 
