@@ -10,6 +10,8 @@ package com.picklerisk.grabber.persistence;
 
 public interface PersistentStore<T> {
 
+	// TODO: [Priority-1] Abstract the repository into interface
+	// TODO: [Priority-1] Add CSV/flat file persistent store
 	public void clearData();
 	public void addData(T data);
 }

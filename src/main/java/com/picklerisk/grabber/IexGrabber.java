@@ -19,7 +19,7 @@ import com.picklerisk.grabber.JsonSchema.Iex.TimeSeriesDailyAdjustedEntry;
 @Service
 public class IexGrabber {
 	
-	// TODO: Pull repetitive code out into interface/abstract base class
+	// TODO: [Priority-1] Pull repetitive code out into interface/abstract base class
 
 	private static final Logger log = LoggerFactory.getLogger(IexGrabber.class);
 	

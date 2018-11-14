@@ -11,6 +11,7 @@ public class EndpointListener {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
+    // TODO: [Priority-2] Update from boilerplate to respond to queries for new data
     @RequestMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         return new Greeting(counter.incrementAndGet(),
