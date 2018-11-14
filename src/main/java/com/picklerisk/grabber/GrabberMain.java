@@ -12,9 +12,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.picklerisk.grabber.JsonSchema.AlphaVantage.TimeSeriesDailyAdjusted;
-import com.picklerisk.grabber.persistence.PersistentStore;
-import com.picklerisk.grabber.persistence.TimeSeriesDailyAdjustedMongoRepository;
+import com.picklerisk.grabber.JsonSchema.Iex.TimeSeriesDailyAdjusted;
+import com.picklerisk.grabber.persistence.AlphaVantageTimeSeriesMongoRepository;
+import com.picklerisk.grabber.persistence.IexTimeSeriesMongoRepository;
 
 @SpringBootApplication
 public class GrabberMain implements CommandLineRunner {
@@ -22,11 +22,10 @@ public class GrabberMain implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(GrabberMain.class);
     
     @Autowired
-    private PersistentStore<TimeSeriesDailyAdjustedMongoRepository,
-    	TimeSeriesDailyAdjusted> mongoAdapter;
+    private IexTimeSeriesMongoRepository mongoAdapter;
     
     @Autowired
-    private AlphaVantageGrabber grabber;
+    private IexGrabber grabber;
     
 	public static void main(String[] args) {
 		log.info("Start Main");
@@ -46,11 +45,11 @@ public class GrabberMain implements CommandLineRunner {
 	}
 	
 	public void refreshAllAdjustedDailies() throws FileNotFoundException {
-		mongoAdapter.clearData();
+		mongoAdapter.deleteAll();
 		List<TimeSeriesDailyAdjusted> allSandP = grabber.grabSandPAdjustedDailyHistory();
 		for (TimeSeriesDailyAdjusted sym : allSandP) {
 			log.info("Adding " + sym.toString() + " to MongoDB");
-			mongoAdapter.addData(sym);
+			mongoAdapter.save(sym);
 		}
 	}
 }

@@ -5,12 +5,11 @@ package com.picklerisk.grabber.persistence;
  * 
  * @author rhaps
  *
- * @param <T> Type of data store (mongo, flat file, etc.)
- * @param <U> Type of data to be stored (TimeSeriesDailyAdjusted, etc.)
+ * @param <T> Type of data to be stored (TimeSeriesDailyAdjusted, etc.)
  */
 
-public interface PersistentStore<T, U> {
+public interface PersistentStore<T> {
 
 	public void clearData();
-	public void addData(U data);
+	public void addData(T data);
 }

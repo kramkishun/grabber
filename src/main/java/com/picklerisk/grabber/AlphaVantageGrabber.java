@@ -27,13 +27,6 @@ public class AlphaVantageGrabber {
 
 	}
 	
-	public TimeSeriesDailyAdjusted grab() {
-        RestTemplate restTemplate = new RestTemplate();
-        
-		TimeSeriesDailyAdjusted tickData = restTemplate.getForObject(avURL, TimeSeriesDailyAdjusted.class);		
-        return tickData;
-	}
-	
 	public TimeSeriesDailyAdjusted grabAdjustedDailyHistory(String sym) {
 		final String url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" 
 				+ sym 

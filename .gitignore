@@ -3,6 +3,6 @@
 .settings
 .project
 target
-application.log
+application.log*
 
 
