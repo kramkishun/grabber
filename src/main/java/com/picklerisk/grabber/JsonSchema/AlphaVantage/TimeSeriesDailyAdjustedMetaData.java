@@ -3,29 +3,29 @@ package com.picklerisk.grabber.JsonSchema.AlphaVantage;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TimeSeriesDailyAdjustedMetaData {
-	
+
 	@JsonProperty ("1. Information")
 	String information;
-	
+
 	@JsonProperty ("2. Symbol")
 	String symbol;
-	
+
 	@JsonProperty ("3. Last Refreshed")
 	String lastRefreshed;
-	
+
 	@JsonProperty ("4. Output Size")
 	String outputSize;
-	
+
 	@JsonProperty ("5. Time Zone")
 	String timeZone;
-	
+
 	public String getInformation() {
 		return information;
 	}
 	public void setInformation(String information) {
 		this.information = information;
 	}
-	
+
 	public String getSymbol() {
 		return symbol;
 	}

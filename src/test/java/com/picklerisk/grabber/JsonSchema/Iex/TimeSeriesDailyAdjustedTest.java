@@ -17,7 +17,7 @@ public class TimeSeriesDailyAdjustedTest {
 	@Test
 	public void test() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		final String url = "https://api.iextrading.com/1.0/stock/aapl/chart/5y";
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			TimeSeriesDailyAdjustedEntry[] data = mapper.readValue(new URL(url), TimeSeriesDailyAdjustedEntry[].class);

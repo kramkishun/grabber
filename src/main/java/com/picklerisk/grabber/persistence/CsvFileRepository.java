@@ -25,11 +25,11 @@ public class CsvFileRepository<E> implements PersistentStore<List<E>> {
 	private File file;
 
 	private Logger log = LoggerFactory.getLogger(CsvFileRepository.class);
-	
+
 	public CsvFileRepository(File file) {
 		this.file = file;
 	}
-	
+
 	@Override
 	public void clearData() {
 		try {
@@ -38,7 +38,7 @@ public class CsvFileRepository<E> implements PersistentStore<List<E>> {
 			log.warn("Could not delete the file: " + file.getAbsolutePath());
 		}
 	}
-	
+
 	public File getFile() {
 		return file;
 	}
@@ -49,17 +49,17 @@ public class CsvFileRepository<E> implements PersistentStore<List<E>> {
 
 	@Override
 	public void addData(List<E> data) {
-		
+
 		try {
 			CsvMapper mapper = new CsvMapper();
-	
+
 			if (data.size() > 0) {
 				CsvSchema schema = mapper.schemaFor(data.get(0).getClass()).withHeader();
 				for (E entry : data) {
 					String csv = mapper.writer(schema).writeValueAsString(entry);
 					Files.write(file.toPath(), csv.getBytes(), 
 							StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-					
+
 					// after first one we don't need the headers anymore.
 					schema = mapper.schemaFor(entry.getClass());
 				}

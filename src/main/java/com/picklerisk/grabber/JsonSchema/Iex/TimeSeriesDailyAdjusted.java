@@ -13,7 +13,7 @@ public class TimeSeriesDailyAdjusted {
 	public TimeSeriesDailyAdjusted() {
 		entries = new ArrayList<>();
 	}
-	
+
 	public List<TimeSeriesDailyAdjustedEntry> getEntries() {
 		return entries;
 	}
@@ -21,7 +21,7 @@ public class TimeSeriesDailyAdjusted {
 	public void setEntries(List<TimeSeriesDailyAdjustedEntry> entries) {
 		this.entries = entries;
 	}
-	
+
 	public String getSymbol() {
 		return symbol;
 	}

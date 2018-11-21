@@ -13,7 +13,7 @@ public class TimeSeriesDailyAdjustedEntry {
 	private String vwap;
 	private String label;
 	private String changeOverTime;
-	
+
 	public String getDate() {
 		return date;
 	}

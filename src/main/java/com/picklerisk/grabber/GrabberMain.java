@@ -21,16 +21,16 @@ import com.picklerisk.grabber.persistence.IexTimeSeriesMongoRepository;
 
 @SpringBootApplication
 public class GrabberMain implements CommandLineRunner {
-	
-    private static final Logger log = LoggerFactory.getLogger(GrabberMain.class);
-    
-    @Autowired
-    //private IexTimeSeriesMongoRepository storageAdapter;
-    private CsvFileRepository<TimeSeriesDailyAdjustedEntry> storageAdapter;
-    
-    @Autowired
-    private IexGrabber grabber;
-    
+
+	private static final Logger log = LoggerFactory.getLogger(GrabberMain.class);
+
+	@Autowired
+	//private IexTimeSeriesMongoRepository storageAdapter;
+	private CsvFileRepository<TimeSeriesDailyAdjustedEntry> storageAdapter;
+
+	@Autowired
+	private IexGrabber grabber;
+
 	public static void main(String[] args) {
 		log.info("Start Main");
 		SpringApplication.run(GrabberMain.class, args);
@@ -38,9 +38,9 @@ public class GrabberMain implements CommandLineRunner {
 	}
 
 	public GrabberMain( ) {
-		
+
 	}
-	
+
 	@Bean
 	public File getDefaultFile() {
 		return new File("not_defined.txt");
@@ -53,9 +53,9 @@ public class GrabberMain implements CommandLineRunner {
 		refreshAllAdjustedDailies();
 		log.info("End of 'run'");
 	}
-	
+
 	public void refreshAllAdjustedDailies() throws FileNotFoundException {
-		
+
 		List<TimeSeriesDailyAdjusted> allSandP = grabber.grabSandPAdjustedDailyHistory();
 		for (TimeSeriesDailyAdjusted sym : allSandP) {
 			log.info("Adding " + sym.getSymbol() + " to Persistent Storage");

@@ -18,50 +18,50 @@ import com.picklerisk.grabber.JsonSchema.Iex.TimeSeriesDailyAdjustedEntry;
 
 @Service
 public class IexGrabber {
-	
+
 	// TODO: [Priority-1] Pull repetitive code out into interface/abstract base class
 
 	private static final Logger log = LoggerFactory.getLogger(IexGrabber.class);
-	
+
 	static final String locationSandPDefinitionFile = "src/main/resources/sandpMakeup.txt";
-	
+
 	public IexGrabber() {
 
 	}
-	
+
 	public TimeSeriesDailyAdjusted grabAdjustedDailyHistory(String sym) {
 		final String url = "https://api.iextrading.com/1.0/stock/" 
 				+ sym
 				+ "/chart/5y";
-		
+
 		TimeSeriesDailyAdjusted tickData = new TimeSeriesDailyAdjusted();
-		
+
 		try {
-		log.info("Requesting: " + url);
-		
-        RestTemplate restTemplate = new RestTemplate();
-		TimeSeriesDailyAdjustedEntry[] allEntries = restTemplate.getForObject(url, TimeSeriesDailyAdjustedEntry[].class);		
-		tickData.setEntries(Arrays.asList(allEntries));
-		tickData.setSymbol(sym);
-		
-		// TODO: Proper API checks to ensure following the API Key rules
-		if (!Optional.ofNullable(allEntries).isPresent())
-			log.warn(sym + " not received. IEX API returned malformed JSON");
-		
+			log.info("Requesting: " + url);
+
+			RestTemplate restTemplate = new RestTemplate();
+			TimeSeriesDailyAdjustedEntry[] allEntries = restTemplate.getForObject(url, TimeSeriesDailyAdjustedEntry[].class);		
+			tickData.setEntries(Arrays.asList(allEntries));
+			tickData.setSymbol(sym);
+
+			// TODO: Proper API checks to ensure following the API Key rules
+			if (!Optional.ofNullable(allEntries).isPresent())
+				log.warn(sym + " not received. IEX API returned malformed JSON");
+
 		} catch (org.springframework.web.client.HttpClientErrorException e) {
 			log.warn(sym + " not found in IEX.");
 		}
-		
+
 		return tickData;
 	}
-	
+
 	public List<TimeSeriesDailyAdjusted> grabSandPAdjustedDailyHistory() throws FileNotFoundException {
-		
+
 		// there's no actual reason to store this in a list - doing it just to
 		// be able to inspect/debug
 		// TODO: remove list
 		List<TimeSeriesDailyAdjusted> allTicks = new ArrayList<>();
-		
+
 		Scanner s = new Scanner(new File(locationSandPDefinitionFile));
 		while (s.hasNextLine()) {
 			String sym = s.nextLine();
@@ -70,9 +70,9 @@ public class IexGrabber {
 			if (tickData.getEntries().size() > 0)
 				allTicks.add(tickData);
 		}	
-		
+
 		s.close();
-		
+
 		return allTicks;
 	}
 }

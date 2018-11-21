@@ -23,10 +23,10 @@ public class TimeSeriesDailyAdjustedEntry {
 
 	@JsonProperty ("7. dividend amount")
 	float dividendAmount;
-	
+
 	@JsonProperty ("8. split coefficient")
 	float splitCoefficient;
-	
+
 	public float getOpen() {
 		return open;
 	}

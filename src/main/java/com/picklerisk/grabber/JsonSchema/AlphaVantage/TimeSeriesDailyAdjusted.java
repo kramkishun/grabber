@@ -14,10 +14,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TimeSeriesDailyAdjusted {
 	@JsonProperty ("Meta Data")
 	TimeSeriesDailyAdjustedMetaData metaData;
-	
+
 	@JsonProperty ("Time Series (Daily)")
 	TimeSeriesDailyAdjustedDay allDailyEntries;
-	
+
 	public TimeSeriesDailyAdjustedMetaData getMetaData() {
 		return metaData;
 	}

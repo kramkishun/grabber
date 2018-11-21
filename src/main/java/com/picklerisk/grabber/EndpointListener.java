@@ -8,32 +8,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EndpointListener {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+	private static final String template = "Hello, %s!";
+	private final AtomicLong counter = new AtomicLong();
 
-    // TODO: [Priority-2] Update from boilerplate to respond to queries for new data
-    @RequestMapping("/greeting")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
-    }
+	// TODO: [Priority-2] Update from boilerplate to respond to queries for new data
+	@RequestMapping("/greeting")
+	public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
+		return new Greeting(counter.incrementAndGet(),
+				String.format(template, name));
+	}
 }
 
 class Greeting {
 
-    private final long id;
-    private final String content;
+	private final long id;
+	private final String content;
 
-    public Greeting(long id, String content) {
-        this.id = id;
-        this.content = content;
-    }
+	public Greeting(long id, String content) {
+		this.id = id;
+		this.content = content;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getContent() {
+		return content;
+	}
 }
