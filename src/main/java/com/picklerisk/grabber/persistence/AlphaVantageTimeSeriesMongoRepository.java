@@ -13,6 +13,8 @@ public interface AlphaVantageTimeSeriesMongoRepository
 
 	@Override
 	default void addData(TimeSeriesDailyAdjusted data) {
+		// NOTE: Don't do this - as the application is now built mostly on Iex format
+		// we need to translate this schema into Iex format prior to entering into Mongo
 		save(data);
 	}
 }

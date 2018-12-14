@@ -14,7 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * @deprecated	IEX has replaced AlphaVantage as the de facto source. If wish to use
+ * 				AlphaVantage as a source, will need to translate the resulting objects
+ * 				into IEX schema prior to inserting into Mongo.
+ */
 @Service
+@Deprecated
 public class AlphaVantageGrabber {
 
 	private static final Logger log = LoggerFactory.getLogger(AlphaVantageGrabber.class);
